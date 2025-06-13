@@ -261,11 +261,13 @@ exports.extract = function (cwd, opts) {
     var onlink = function () {
       if (win32) return next() // skip links on win for now before it can be tested
       xfs.unlink(name, function () {
+ alert-autofix-1
         var srcpath = path.resolve(cwd, header.linkname)
         var relativePath = path.relative(cwd, srcpath)
         if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
           return next(new Error('Invalid linkname: ' + header.linkname))
         }
+     main
 
         xfs.link(srcpath, name, function (err) {
           if (err && err.code === 'EPERM' && opts.hardlinkAsFilesFallback) {
